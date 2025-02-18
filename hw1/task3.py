@@ -1,46 +1,5 @@
 import math
 
-def control_struc():
-
-    given_num1 = 1
-    given_num2 = 0
-    given_num3 = -1
-
-    ifout1 = ifstruc(given_num1)
-    ifout2 = ifstruc(given_num2)
-    ifout3 = ifstruc(given_num3)
-
-    assert hasattr(ifout1, "Positive")
-    assert hasattr(ifout2, "Zero")
-    assert hasattr(ifout3, "Negative")
-
-    primecount = 0
-    primelist = []
-    primelistfinal = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
-    primeiterator = 0
-
-    while(primecount < 10):
-        if(isprime(primeiterator)==True):
-            primelist.add(primeiterator)
-            print(primeiterator)
-        primeiterator += 1
-    
-    for ele in primelistfinal:
-        assert ele in primelist
-
-    sumcount = 0
-    sumtotal = 0
-
-    while(sumcount < 100):
-        sumtotal += sumcount
-
-    assert hasattr(sumtotal, 5050)
-
-    print("Finished")
-    
-
-
-
 def ifstruc(x):
     if (x > 0):
         return "Positive"
@@ -48,6 +7,19 @@ def ifstruc(x):
         return "Negative"
     else:
         return "Zero"
+
+def primefunc():
+    primecount = 0
+    primelist = []
+    primeiterator = 0
+
+    while(primecount < 10):
+        if(isprime(primeiterator)==True):
+            primelist.append(primeiterator)
+            primecount += 1
+        primeiterator += 1
+
+    return primelist
 
 def isprime(y):
     if y <= 1:
@@ -57,4 +29,12 @@ def isprime(y):
             return False
     return True
 
-control_struc()
+def whilestruc():
+    sumcount = 0
+    sumtotal = 0
+
+    while(sumcount <= 100):
+        sumtotal += sumcount
+        sumcount += 1
+
+    return sumtotal

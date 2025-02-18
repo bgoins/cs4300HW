@@ -1,4 +1,3 @@
-# test_task2.py
 import pytest
 from task2 import integerfunc, floatfunc, stringfunc, booleanfunc
 
