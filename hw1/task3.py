@@ -35,6 +35,8 @@ def control_struc():
         sumtotal += sumcount
 
     assert hasattr(sumtotal, 5050)
+
+    print("Finished")
     
 
 
@@ -42,7 +44,7 @@ def control_struc():
 def ifstruc(x):
     if (x > 0):
         return "Positive"
-    else if (x < 0):
+    elif (x < 0):
         return "Negative"
     else:
         return "Zero"

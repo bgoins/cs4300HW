@@ -1,14 +1,11 @@
-def test_types():
-    a = 1
-    assert type(a) is int
+def integerfunc():
+    return 1
 
-    a = 1.1
-    assert type(b) is int
-    
-    c = "hello"
-    assert type(c) is str
+def floatfunc():
+    return 1.1
 
-    d = True
-    assert type(d) is bool
+def stringfunc():
+    return "str"
 
-test_types()
+def booleanfunc():
+    return True

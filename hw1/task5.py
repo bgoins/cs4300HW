@@ -7,6 +7,8 @@ def books():
     for ele in slicedlisttest:
         assert ele in slicedlist
 
+    print("Finished books")
+
 def students():
     studict = {"Alpha":101,"Beta":202, "Delta":303}
 
@@ -14,6 +16,8 @@ def students():
 
     for ele in studicttest:
         assert ele in studict
+
+    print("Finished students")
 
 books()
 students()
