@@ -19,14 +19,16 @@ function fetchBookingHistory() {
         return;
     }
 
-    fetch(`/api/bookings/user_bookings/?user=${encodeURIComponent(userName)}`)
+    fetch("/proxy/8000/api/bookings/user-bookings/?user=" + encodeURIComponent(userName))
         .then(response => {
+            console.log("Response status:", response.status); // Debugging
             if (!response.ok) {
-                throw new Error("Failed to fetch booking history.");
+                throw new Error(`Failed to fetch booking history. Status: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
+            console.log("Booking history data:", data); // Debugging
             let historyDiv = document.getElementById("booking-history");
             historyDiv.innerHTML = "";
 
@@ -48,7 +50,7 @@ function fetchBookingHistory() {
             historyDiv.innerHTML = list;
         })
         .catch(error => {
-            console.error("Error:", error);
+            console.error("Error fetching booking history:", error);
             document.getElementById("booking-history").innerHTML =
                 "<p class='text-danger'>Failed to load booking history.</p>";
         });

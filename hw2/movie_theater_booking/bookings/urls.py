@@ -8,7 +8,7 @@ from .views import (
 router = DefaultRouter()
 router.register(r'movies', MovieViewSet)
 router.register(r'seats', SeatViewSet)
-router.register(r'bookings', BookingViewSet)
+router.register(r'bookings', BookingViewSet, basename="bookings")
 
 urlpatterns = [
     path('api/', include(router.urls)),
@@ -16,5 +16,4 @@ urlpatterns = [
     path('movie/<int:movie_id>/seats/', seat_booking, name='seat_booking'),
     path("movie/<int:movie_id>/seat/<int:seat_id>/book/", book_seat, name="book_seat"),
     path("booking-history/", booking_history, name="booking_history"),
-    path('api/bookings/user_bookings/', BookingViewSet.as_view({'get': 'user_bookings'}), name='user_bookings'),
 ]

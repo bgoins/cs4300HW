@@ -15,7 +15,7 @@
                             <p class="card-text">{{ movie.description }}</p>
                             <p><strong>Release Date:</strong> {{ movie.release_date }}</p>
                             <p><strong>Duration:</strong> {{ movie.duration }} min</p>
-                            <a href="{{ request.scheme }}://{{ request.get_host }}/proxy/8000{% url 'seat_booking' movie.id %}" class="btn btn-primary">
+                            <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'seat_booking' movie.id %}" class="btn btn-primary">
                                 Book Now
                             </a>                            
                         </div>

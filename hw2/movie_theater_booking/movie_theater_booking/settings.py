@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-g53o7tg%2s6^$fsh$)#p&(nw86$q#t(-p3s%%6wc3@5yy_(kts
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['editor-bgoins-5.devedu.io', '127.0.0.1']
+ALLOWED_HOSTS = ['editor-bgoins-5.devedu.io', '127.0.0.1','app-bgoins-5.devedu.io','0.0.0.0']
 
+FORCE_SCRIPT_NAME = "/proxy/8000"
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
 
@@ -127,3 +128,11 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
+}
+

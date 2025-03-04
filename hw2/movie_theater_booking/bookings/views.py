@@ -7,6 +7,10 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.timezone import now
 from django.contrib import messages
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+import json
 
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
@@ -35,19 +39,20 @@ class SeatViewSet(viewsets.ModelViewSet):
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework.permissions import AllowAny
 from .models import Booking
 from .serializers import BookingSerializer
 
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+    permission_classes = [AllowAny]
 
-    @action(detail=False, methods=["GET"])
+    @action(detail=False, methods=["GET"], url_path="user-bookings")
     def user_bookings(self, request):
         user_name = request.GET.get("user", "").strip()
-
         if not user_name:
-            return Response([])  # Return an empty list if no user is provided
+            return Response([])
 
         bookings = Booking.objects.filter(user=user_name).select_related("movie", "seat")
         data = [
@@ -61,6 +66,8 @@ class BookingViewSet(viewsets.ModelViewSet):
         return Response(data)
 
 
+
+
 def movie_list(request):
     movies = Movie.objects.all()
     return render(request, 'bookings/movie_list.html', {'movies': movies})
@@ -70,14 +77,6 @@ def seat_booking(request, movie_id):
     seats = Seat.objects.filter(is_booked=False)
 
     return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': seats})
-
-
-
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
-import json
-from .models import Movie, Seat, Booking
 
 @csrf_exempt  # Temporarily disable CSRF to debug (remove later)
 @require_POST  # Ensure it only accepts POST
