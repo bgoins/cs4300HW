@@ -20,12 +20,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r#prgkao385sql9!eo!4jl@%4*%_e9&5qp7+$d4f54!k@jawjl'
+SECRET_KEY = 'django-insecure-g53o7tg%2s6^$fsh$)#p&(nw86$q#t(-p3s%%6wc3@5yy_(kts'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['editor-bgoins-5.devedu.io']
+ALLOWED_HOSTS = ['editor-bgoins-5.devedu.io', '127.0.0.1']
+
+USE_X_FORWARDED_HOST = True
+USE_X_FORWARDED_PORT = True
 
 
 # Application definition
@@ -37,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'rest_framework',
+    'bookings',
 ]
 
 MIDDLEWARE = [

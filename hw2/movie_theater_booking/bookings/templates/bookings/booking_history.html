@@ -1,0 +1,58 @@
+{% extends "bookings/base.html" %}
+
+{% block title %}Booking History{% endblock %}
+
+{% block content %}
+<h2>Booking History</h2>
+
+<label for="user">Enter your name:</label>
+<input type="text" id="user" required>
+<button class="btn btn-primary" onclick="fetchBookingHistory()">View History</button>
+
+<div id="booking-history" class="mt-3"></div>
+
+<script>
+function fetchBookingHistory() {
+    let userName = document.getElementById("user").value.trim();
+    if (!userName) {
+        alert("Please enter a valid name.");
+        return;
+    }
+
+    fetch(`/api/bookings/user_bookings/?user=${encodeURIComponent(userName)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to fetch booking history.");
+            }
+            return response.json();
+        })
+        .then(data => {
+            let historyDiv = document.getElementById("booking-history");
+            historyDiv.innerHTML = "";
+
+            if (!data.length) {
+                historyDiv.innerHTML = "<p>No bookings found.</p>";
+                return;
+            }
+
+            let list = "<ul class='list-group'>";
+            data.forEach(booking => {
+                list += `<li class="list-group-item">
+                    <strong>Movie:</strong> ${booking.movie_title} <br>
+                    <strong>Seat:</strong> ${booking.seat_number} <br>
+                    <strong>Booking Date:</strong> ${booking.booking_date}
+                </li>`;
+            });
+            list += "</ul>";
+
+            historyDiv.innerHTML = list;
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("booking-history").innerHTML =
+                "<p class='text-danger'>Failed to load booking history.</p>";
+        });
+}
+</script>
+
+{% endblock %}
