@@ -7,7 +7,6 @@ from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils.timezone import now
 from django.contrib import messages
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 import json
@@ -78,14 +77,13 @@ def seat_booking(request, movie_id):
 
     return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': seats})
 
-@csrf_exempt  # Temporarily disable CSRF to debug (remove later)
-@require_POST  # Ensure it only accepts POST
+@csrf_exempt
+@require_POST
 def book_seat(request, movie_id, seat_id):
     try:
-        print("Received request at book_seat")  # Debugging
+        print("Received request at book_seat")
         print("Request method:", request.method)
 
-        # Attempt to load JSON data
         try:
             data = json.loads(request.body)
             user_name = data.get("user", "").strip()
@@ -98,7 +96,6 @@ def book_seat(request, movie_id, seat_id):
         seat = Seat.objects.get(id=seat_id, is_booked=False)
         movie = Movie.objects.get(id=movie_id)
 
-        # Create booking
         Booking.objects.create(movie=movie, seat=seat, user=user_name)
         seat.is_booked = True
         seat.save()

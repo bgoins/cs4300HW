@@ -19,7 +19,7 @@ function fetchBookingHistory() {
         return;
     }
 
-    fetch("/proxy/8000/api/bookings/user-bookings/?user=" + encodeURIComponent(userName))
+    fetch("/api/bookings/user-bookings/?user=" + encodeURIComponent(userName))
         .then(response => {
             console.log("Response status:", response.status); // Debugging
             if (!response.ok) {

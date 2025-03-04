@@ -40,7 +40,7 @@
                 return;
             }
     
-            fetch(`/proxy/8000/movie/{{ movie.id }}/seat/${seatId}/book/`, {  // Ensure full URL
+            fetch(`/movie/{{ movie.id }}/seat/${seatId}/book/`, {  // Ensure full URL
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

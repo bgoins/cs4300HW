@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['editor-bgoins-5.devedu.io', '127.0.0.1','app-bgoins-5.devedu.io','0.0.0.0']
 
-FORCE_SCRIPT_NAME = "/proxy/8000"
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True
 
