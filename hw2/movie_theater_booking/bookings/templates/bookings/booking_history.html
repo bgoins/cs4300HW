@@ -21,14 +21,12 @@ function fetchBookingHistory() {
 
     fetch("/api/bookings/user-bookings/?user=" + encodeURIComponent(userName))
         .then(response => {
-            console.log("Response status:", response.status); // Debugging
             if (!response.ok) {
                 throw new Error(`Failed to fetch booking history. Status: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
-            console.log("Booking history data:", data); // Debugging
             let historyDiv = document.getElementById("booking-history");
             historyDiv.innerHTML = "";
 

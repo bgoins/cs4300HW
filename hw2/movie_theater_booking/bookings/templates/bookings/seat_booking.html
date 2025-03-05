@@ -40,7 +40,7 @@
                 return;
             }
     
-            fetch(`/movie/{{ movie.id }}/seat/${seatId}/book/`, {  // Ensure full URL
+            fetch(`/movie/{{ movie.id }}/seat/${seatId}/book/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -48,12 +48,12 @@
                 },
                 body: JSON.stringify({ "user": userName })
             })
-            .then(response => response.text())  // Read response as text
+            .then(response => response.text())
             .then(text => {
-                console.log("Raw Response:", text);  // Debugging
+                console.log("Raw Response:", text);
                 let data;
                 try {
-                    data = JSON.parse(text);  // Try parsing JSON
+                    data = JSON.parse(text);
                 } catch (error) {
                     console.error("Invalid JSON received:", text);
                     alert("Server error: Invalid JSON response.");

@@ -21,8 +21,8 @@ class Booking(models.Model):
 
 @receiver(post_save, sender=Movie)
 def create_seats_for_movie(sender, instance, created, **kwargs):
-    if created:  # Only create seats when a new movie is first added
-        existing_seats = Seat.objects.count()  # Check if seats already exist
-        if existing_seats == 0:  # Only create if no seats exist
-            for i in range(1, 21):  # Create 20 generic seats (not linked to a movie)
+    if created:
+        existing_seats = Seat.objects.count()
+        if existing_seats == 0:
+            for i in range(1, 21):
                 Seat.objects.create(seat_number=i, is_booked=False)

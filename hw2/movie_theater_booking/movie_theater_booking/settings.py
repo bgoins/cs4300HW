@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-g53o7tg%2s6^$fsh$)#p&(nw86$q#t(-p3s%%6wc3@5yy_(kts
 DEBUG = True
 
 ALLOWED_HOSTS = ['editor-bgoins-5.devedu.io', '127.0.0.1','app-bgoins-5.devedu.io','0.0.0.0']
+CSRF_TRUSTED_ORIGINS = ['https://app-bgoins-5.devedu.io']
 
 USE_X_FORWARDED_HOST = True
 USE_X_FORWARDED_PORT = True

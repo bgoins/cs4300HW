@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 import json
+from rest_framework.permissions import AllowAny
 
 class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
@@ -35,17 +36,10 @@ class SeatViewSet(viewsets.ModelViewSet):
         seat.save()
         return Response({"message": "Seat booked successfully", "booking_id": booking.id})
 
-from rest_framework import viewsets
-from rest_framework.response import Response
-from rest_framework.decorators import action
-from rest_framework.permissions import AllowAny
-from .models import Booking
-from .serializers import BookingSerializer
-
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
-    permission_classes = [AllowAny]
+    #permission_classes = [AllowAny]
 
     @action(detail=False, methods=["GET"], url_path="user-bookings")
     def user_bookings(self, request):
@@ -64,9 +58,6 @@ class BookingViewSet(viewsets.ModelViewSet):
         ]
         return Response(data)
 
-
-
-
 def movie_list(request):
     movies = Movie.objects.all()
     return render(request, 'bookings/movie_list.html', {'movies': movies})
@@ -77,7 +68,6 @@ def seat_booking(request, movie_id):
 
     return render(request, 'bookings/seat_booking.html', {'movie': movie, 'seats': seats})
 
-@csrf_exempt
 @require_POST
 def book_seat(request, movie_id, seat_id):
     try:
